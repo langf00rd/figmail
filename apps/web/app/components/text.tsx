@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 
 export default function Text(props: React.PropsWithChildren): JSX.Element {

@@ -1,7 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
-import React from "react";
+import React, { useState } from "react";
 import { useDraggable } from "@dnd-kit/core";
 import { Resizable } from "re-resizable";
 import { CopyPlus } from "lucide-react";
@@ -14,13 +14,14 @@ export function Draggable(props: {
   onDuplicate: (element: UIElement) => void;
   element: UIElement;
 }): JSX.Element {
+  const [showToolbar, setShowToolbar] = useState(false);
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: props.id,
   });
 
   const draggableStyle = {
-    backgroundColor: "#fff",
-    border: "2px solid #f1f1f1",
+    // backgroundColor: "#fff",
+    // border: "2px solid blue",
     height: "100%",
     width: "100%",
     padding: "10px",
@@ -32,19 +33,25 @@ export function Draggable(props: {
       }
     : undefined;
 
+  function toggleShowToolbar(): void {
+    setShowToolbar(!showToolbar);
+  }
+
   return (
-    <Resizable style={{ ...props.styles, ...style }}>
-      <DraggableToolBar {...props} />
-      <div
-        ref={setNodeRef}
-        style={{ ...draggableStyle }}
-        {...listeners}
-        {...attributes}
-        id={props.id}
-      >
-        {props.children}
-      </div>
-    </Resizable>
+    <div onMouseEnter={toggleShowToolbar} onMouseLeave={toggleShowToolbar}>
+      <Resizable className="resizable" style={{ ...props.styles, ...style }}>
+        {showToolbar ? <DraggableToolBar {...props} /> : null}
+        <div
+          ref={setNodeRef}
+          style={{ ...draggableStyle }}
+          {...listeners}
+          {...attributes}
+          id={props.id}
+        >
+          {props.children}
+        </div>
+      </Resizable>
+    </div>
   );
 }
 
@@ -53,7 +60,7 @@ function DraggableToolBar(props: {
   element: UIElement;
 }): JSX.Element {
   return (
-    <ul className="absolute -top-10 z-10">
+    <ul className="absolute z-10">
       <button
         onClick={() => {
           props.onDuplicate(props.element);

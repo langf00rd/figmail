@@ -26,3 +26,11 @@ b {
       object-fit: contain;
    }
 }
+
+.resizable {
+   border: 2px solid transparent;
+}
+
+.resizable:hover {
+   border-color: blue;
+}
