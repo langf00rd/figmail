@@ -1,7 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
-import React from "react";
+import React, { useState } from "react";
 import { useDraggable } from "@dnd-kit/core";
 import { Resizable } from "re-resizable";
 
@@ -10,10 +10,15 @@ export function Draggable(props: {
    styles: object;
    children: ReactNode;
 }): JSX.Element {
+   const [disableDrag, setDisableDrag] = useState(false);
    const { attributes, listeners, setNodeRef, transform } = useDraggable({
       id: props.id,
-      // disabled: true,
+      disabled: disableDrag,
    });
+
+   function toggleCanDrag(): void {
+      setDisableDrag(!disableDrag);
+   }
 
    const draggableStyle = {
       backgroundColor: "#fff",
@@ -31,14 +36,21 @@ export function Draggable(props: {
 
    return (
       <Resizable style={{ ...props.styles, ...style, position: "absolute" }}>
-         <div
-            ref={setNodeRef}
-            style={{ ...draggableStyle }}
-            {...listeners}
-            {...attributes}
+         <button
+            className={`p-5 ${!disableDrag && "border border-slate-400"}`}
+            onClick={toggleCanDrag}
+            type="button"
          >
-            {props.children}
-         </div>
+            <div
+               ref={setNodeRef}
+               style={{ ...draggableStyle }}
+               {...listeners}
+               {...attributes}
+               id={props.id}
+            >
+               {props.children}
+            </div>
+         </button>
       </Resizable>
    );
 }

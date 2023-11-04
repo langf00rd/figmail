@@ -18,22 +18,6 @@ b {
    color: #000;
    font-weight: 600;
 }
-/* 
-.contenteditable-element {
-   user-select: text;
-} */
-
-main {
-   width: 100vw;
-   height: 100vh;
-}
-
-.content {
-   border: 2px solid #f1f1f1;
-   min-height: 700px;
-   max-width: 500px;
-   margin: 0 auto;
-}
 
 .ui-img {
    min-width: 200px;
@@ -41,4 +25,12 @@ main {
    > img {
       object-fit: contain;
    }
+}
+
+main {
+   height: 421px;
+   width: 421px;
+   margin: auto;
+   border: 2px solid #e0e0e0;
+   position: relative;
 }

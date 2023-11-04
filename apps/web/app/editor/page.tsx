@@ -4,14 +4,16 @@ import React, { useState } from "react";
 import type { DragEndEvent } from "@dnd-kit/core";
 import { DndContext } from "@dnd-kit/core";
 import Image from "next/image";
+import { toast } from "sonner";
 import { Draggable } from "../components/draggable";
 import { Droppable } from "../components/droppable";
 import type { UIElement } from "../../interface";
+import Text from "../components/text";
 
 const elements: UIElement[] = [
    {
       id: "1",
-      content: <p contentEditable>paragraph</p>,
+      content: <Text>just some random text</Text>,
       position: {
          x: 0,
          y: 0,
@@ -19,14 +21,6 @@ const elements: UIElement[] = [
    },
    {
       id: "2",
-      content: <h1 contentEditable>heading</h1>,
-      position: {
-         x: 0,
-         y: 0,
-      },
-   },
-   {
-      id: "3",
       content: (
          <div className="ui-img">
             <Image alt="" fill src="/demo.png" />
@@ -41,31 +35,44 @@ const elements: UIElement[] = [
 
 export default function Page(): JSX.Element {
    const [uiElements, setUIElements] = useState(elements);
+   const [disableDrag, setDisableDrag] = useState(false);
 
    function handleDragEnd(e: DragEndEvent): void {
       const element = uiElements.find((x) => x.id === e.active.id);
+
       if (!element) return;
       element.position.x += e.delta.x;
       element.position.y += e.delta.y;
+
       const _elements = uiElements.map((x) => {
          if (x.id === element.id) return element;
          return x;
       });
+
+      setUIElements(_elements);
+   }
+
+   function duplicate(element: UIElement): void {
       const newElement: UIElement = {
          id: Date.now().toString(),
          content: element.content,
          position: {
-            x: 0,
-            y: element.position.y,
+            x: element.position.x + 30,
+            y: element.position.y + 30,
          },
       };
-      setUIElements([..._elements, newElement]);
+      setUIElements([...uiElements, newElement]);
+      toast.success("duplicated!");
+   }
+
+   function toggleCanDrag(): void {
+      setDisableDrag(!disableDrag);
    }
 
    return (
       <DndContext onDragEnd={handleDragEnd}>
          <Droppable>
-            <ul>
+            <main>
                {uiElements.map((element) => (
                   <Draggable
                      id={element.id}
@@ -75,12 +82,19 @@ export default function Page(): JSX.Element {
                         top: `${element.position.y}px`,
                      }}
                   >
+                     <button
+                        className="p-5 bg-slate-100"
+                        onClick={() => {
+                           toggleCanDrag();
+                           duplicate(element);
+                        }}
+                        type="button"
+                     >
+                        duplicate
+                     </button>
                      {element.content}
                   </Draggable>
                ))}
-            </ul>
-            <main>
-               <div className="content" />
             </main>
          </Droppable>
       </DndContext>
