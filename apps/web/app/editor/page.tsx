@@ -15,6 +15,8 @@ import Table from "../components/table";
 import { Img } from "../components/img";
 import Head from "../components/head";
 import Hr from "../components/hr";
+import Section from "../components/section";
+import { Preview } from "../components/preview";
 
 const elements: UIElement[] = [
    {
@@ -55,6 +57,15 @@ const mainStyle = {
    border: "2px solid #e0e0e0",
    overflow: "hidden",
    gap: "80px",
+   backgroundColor: "#ffffff",
+   fontFamily:
+      '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif',
+};
+
+const bodyStyle = {
+   backgroundColor: "#ffffff",
+   fontFamily:
+      '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif',
 };
 
 export default function Page(): JSX.Element {
@@ -98,8 +109,11 @@ export default function Page(): JSX.Element {
       const reactElement = (
          <Html>
             <Head />
-            <Body>
-               <div dangerouslySetInnerHTML={{ __html: main.innerHTML }} />
+            <Preview>hello world</Preview>
+            <Body style={bodyStyle}>
+               <Section>
+                  <div dangerouslySetInnerHTML={{ __html: main.innerHTML }} />
+               </Section>
             </Body>
          </Html>
       );
