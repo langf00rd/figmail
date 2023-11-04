@@ -20,17 +20,9 @@ b {
 }
 
 .ui-img {
-   min-width: 200px;
-   min-height: 200px;
+   min-width: 100px;
+   min-height: 100px;
    > img {
       object-fit: contain;
    }
-}
-
-main {
-   height: 421px;
-   width: 421px;
-   margin: auto;
-   border: 2px solid #e0e0e0;
-   position: relative;
 }

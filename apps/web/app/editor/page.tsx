@@ -1,5 +1,6 @@
 "use client";
 
+import * as ReactDomServer from "react-dom/server";
 import React, { useState } from "react";
 import type { DragEndEvent } from "@dnd-kit/core";
 import { DndContext } from "@dnd-kit/core";
@@ -33,9 +34,18 @@ const elements: UIElement[] = [
    },
 ];
 
+const mainStyle = {
+   height: "800px",
+   width: "800px",
+   margin: "auto",
+   border: "2px solid #e0e0e0",
+   overflow: "hidden",
+   gap: "80px",
+   display: "grid",
+};
+
 export default function Page(): JSX.Element {
    const [uiElements, setUIElements] = useState(elements);
-   const [disableDrag, setDisableDrag] = useState(false);
 
    function handleDragEnd(e: DragEndEvent): void {
       const element = uiElements.find((x) => x.id === e.active.id);
@@ -65,38 +75,48 @@ export default function Page(): JSX.Element {
       toast.success("duplicated!");
    }
 
-   function toggleCanDrag(): void {
-      setDisableDrag(!disableDrag);
+   function render(): void {
+      const doctype =
+         '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">';
+      const markup = ReactDomServer.renderToStaticMarkup(componentToRender);
+      const document = `${doctype}${markup}`;
+      toast.success(document.length);
    }
 
+   const componentToRender = <Main onDuplicate={duplicate} uiElements={uiElements} />;
+
    return (
-      <DndContext onDragEnd={handleDragEnd}>
-         <Droppable>
-            <main>
-               {uiElements.map((element) => (
-                  <Draggable
-                     id={element.id}
-                     key={element.id}
-                     styles={{
-                        left: `${element.position.x}px`,
-                        top: `${element.position.y}px`,
-                     }}
-                  >
-                     <button
-                        className="p-5 bg-slate-100"
-                        onClick={() => {
-                           toggleCanDrag();
-                           duplicate(element);
-                        }}
-                        type="button"
-                     >
-                        duplicate
-                     </button>
-                     {element.content}
-                  </Draggable>
-               ))}
-            </main>
-         </Droppable>
-      </DndContext>
+      <>
+         <button onClick={render} type="button">
+            render
+         </button>
+         <DndContext onDragEnd={handleDragEnd}>
+            <Droppable>{componentToRender}</Droppable>
+         </DndContext>
+      </>
+   );
+}
+
+function Main(props: {
+   uiElements: UIElement[];
+   onDuplicate: (element: UIElement) => void;
+}): JSX.Element {
+   return (
+      <main style={{ ...mainStyle }}>
+         {props.uiElements.map((element) => (
+            <Draggable
+               element={element}
+               id={element.id}
+               key={element.id}
+               onDuplicate={props.onDuplicate}
+               styles={{
+                  left: `${element.position.x}px`,
+                  top: `${element.position.y}px`,
+               }}
+            >
+               {element.content}
+            </Draggable>
+         ))}
+      </main>
    );
 }
