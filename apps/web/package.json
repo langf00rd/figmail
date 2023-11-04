@@ -11,17 +11,21 @@
    "dependencies": {
       "@dnd-kit/core": "^6.0.8",
       "@dnd-kit/utilities": "^3.2.1",
+      "@types/nodemailer": "^6.4.13",
+      "axios": "^1.6.0",
       "clsx": "^2.0.0",
       "geist": "^1.0.0",
       "lucide-react": "^0.292.0",
       "next": "^13.4.19",
+      "nodemailer": "^6.9.7",
       "pretty": "^2.0.0",
       "re-resizable": "^6.9.11",
       "react": "^18.2.0",
       "react-dom": "^18.2.0",
       "sonner": "^1.1.0",
       "tailwind-merge": "^2.0.0",
-      "ui": "workspace:*"
+      "ui": "workspace:*",
+      "zod": "^3.22.4"
    },
    "devDependencies": {
       "@next/eslint-plugin-next": "^13.4.19",

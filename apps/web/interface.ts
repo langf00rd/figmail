@@ -5,3 +5,8 @@ export interface UIElement {
   content: ReactNode;
   position: { x: number; y: number };
 }
+
+export interface GenerateMarkupProps {
+  /** copy html to clipboard after generating markup */
+  copyHTML?: boolean;
+}
