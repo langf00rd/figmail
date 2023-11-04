@@ -6,6 +6,7 @@ import { useDraggable } from "@dnd-kit/core";
 import { Resizable } from "re-resizable";
 import { CopyPlus } from "lucide-react";
 import type { UIElement } from "../../interface";
+import { DRAGGABLE_STYLE } from "../lib/constants";
 
 export function Draggable(props: {
   id: string;
@@ -18,14 +19,6 @@ export function Draggable(props: {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: props.id,
   });
-
-  const draggableStyle = {
-    // backgroundColor: "#fff",
-    // border: "2px solid blue",
-    height: "100%",
-    width: "100%",
-    padding: "10px",
-  };
 
   const style = transform
     ? {
@@ -43,7 +36,7 @@ export function Draggable(props: {
         {showToolbar ? <DraggableToolBar {...props} /> : null}
         <div
           ref={setNodeRef}
-          style={{ ...draggableStyle }}
+          style={{ ...DRAGGABLE_STYLE }}
           {...listeners}
           {...attributes}
           id={props.id}

@@ -2,7 +2,7 @@ import * as React from "react";
 
 type ImageProps = React.ComponentPropsWithoutRef<"img">;
 
-export function Img(props: ImageProps): JSX.Element {
+export default function Img(props: ImageProps): JSX.Element {
   return (
     <table style={{ maxWidth: "640px", ...props.style }} width="100%">
       <tbody>

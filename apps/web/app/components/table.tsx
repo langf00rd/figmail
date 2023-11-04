@@ -1,5 +1,4 @@
 type TableProps = React.ComponentPropsWithoutRef<"table">;
-
 export default function Table(props: TableProps): JSX.Element {
   return (
     <table

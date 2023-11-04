@@ -1,5 +1,4 @@
 type HRProps = React.ComponentPropsWithoutRef<"hr">;
-
 export default function Hr(props: HRProps): JSX.Element {
   return (
     <hr

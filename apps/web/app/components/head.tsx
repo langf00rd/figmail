@@ -1,7 +1,4 @@
-"use client";
-
 type HeadProps = React.ComponentPropsWithoutRef<"head">;
-
 export default function Head(props: HeadProps): JSX.Element {
   return (
     <head {...props}>
