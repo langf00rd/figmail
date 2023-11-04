@@ -5,7 +5,6 @@ import React, { useState } from "react";
 import type { DragEndEvent } from "@dnd-kit/core";
 import { DndContext } from "@dnd-kit/core";
 import { toast } from "sonner";
-// import pretty from "pretty";
 import { Draggable } from "../components/draggable";
 import { Droppable } from "../components/droppable";
 import type { UIElement } from "../../interface";
@@ -14,7 +13,6 @@ import Body from "../components/body";
 import Html from "../components/html";
 import Table from "../components/table";
 import { Img } from "../components/img";
-import Section from "../components/section";
 import Head from "../components/head";
 import Hr from "../components/hr";
 
@@ -38,12 +36,10 @@ const elements: UIElement[] = [
    {
       id: "3",
       content: (
-         <Section>
-            <Img
-               alt="image"
-               src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Vercel_logo_black.svg/1024px-Vercel_logo_black.svg.png"
-            />
-         </Section>
+         <Img
+            alt="image"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Vercel_logo_black.svg/1024px-Vercel_logo_black.svg.png"
+         />
       ),
       position: {
          x: 0,
