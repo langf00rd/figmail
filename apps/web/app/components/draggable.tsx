@@ -13,8 +13,10 @@ import {
    X,
 } from "lucide-react";
 import { toast } from "sonner";
+import { useAtom } from "jotai";
 import type { UIElement } from "../../interface";
 import { DRAGGABLE_STYLE } from "../lib/constants";
+import { isGeneratingMarkupAtom } from "../atoms";
 
 export function Draggable(props: {
    id: string;
@@ -24,6 +26,7 @@ export function Draggable(props: {
    onRemove: (element: UIElement) => void;
    element: UIElement;
 }): JSX.Element | null {
+   const [isGeneratingMarkup, _] = useAtom(isGeneratingMarkupAtom);
    const [showToolbar, setShowToolbar] = useState(false);
    const [currentElement, setCurrentElement] = useState<EventTarget | null>(null);
    const { attributes, listeners, setNodeRef, transform } = useDraggable({
@@ -44,8 +47,13 @@ export function Draggable(props: {
    if (!props.children) return null;
 
    return (
-      <Resizable className="resizable" style={{ ...props.styles, ...style }}>
+      <Resizable
+         className="resizable"
+         enable={!isGeneratingMarkup ? undefined : false}
+         style={{ ...props.styles, ...style }}
+      >
          <div
+            className="w-full h-full"
             onMouseEnter={(e) => {
                toggleShowToolbar(e.target);
             }}
@@ -88,6 +96,7 @@ function DraggableToolBar(props: {
          selectedElementTarget.style.color = styles?.color as string;
          selectedElementTarget.style.textAlign = styles?.textAlign as string;
          selectedElementTarget.style.fontSize = styles?.fontSize as string;
+         selectedElementTarget.style.height = styles?.height as string;
       } catch (error: unknown) {
          toast.error(String(error));
       }
@@ -169,6 +178,21 @@ function DraggableToolBar(props: {
                      defaultValue={16}
                      onChange={(e) => {
                         setStyles({ ...styles, fontSize: `${e.target.value}px` });
+                     }}
+                     type="number"
+                  />
+                  px
+               </div>
+            </li>
+         ) : null}{" "}
+         {props.element.customizeableStyles?.includes("HEIGHT") ? (
+            <li>
+               <div className="flex gap-1">
+                  <input
+                     className="border w-[50px] text-center"
+                     defaultValue={1}
+                     onChange={(e) => {
+                        setStyles({ ...styles, height: `${e.target.value}px` });
                      }}
                      type="number"
                   />

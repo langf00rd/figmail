@@ -5,8 +5,9 @@ export default function Hr(props: HRProps): JSX.Element {
       {...props}
       style={{
         width: "100%",
+        background: "#eaeaea",
+        height: "1px",
         border: "none",
-        borderTop: "1px solid #eaeaea",
         ...props.style,
       }}
     />

@@ -1,7 +1,7 @@
 module.exports = {
    reactStrictMode: true,
    transpilePackages: ["ui"],
-   //  experimental: {
-   //     serverActions: true,
-   //  },
+   experimental: {
+      swcPlugins: [["@swc-jotai/react-refresh", {}]],
+   },
 };

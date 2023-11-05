@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import type { DragEndEvent } from "@dnd-kit/core";
 import { DndContext } from "@dnd-kit/core";
-import { toast } from "sonner";
 import { UI_ELEMENTS } from "../../lib/constants";
 import type { UIElement } from "../../../interface";
 import { Droppable } from "../../components/droppable";
@@ -39,7 +38,6 @@ export default function Editor(): JSX.Element {
          },
       };
       setUIElements([...uiElements, newElement]);
-      toast.success("duplicated!");
    }
 
    function remove(element: UIElement): void {
