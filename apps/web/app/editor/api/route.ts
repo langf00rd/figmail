@@ -1,6 +1,6 @@
 import { createTransport } from "nodemailer";
 
-export async function POST(request: Request): Promise<void> {
+export async function POST(request: Request): Promise<Response> {
    const { html, receipient } = (await request.json()) as {
       html: string;
       receipient: string;
@@ -13,12 +13,12 @@ export async function POST(request: Request): Promise<void> {
       },
    });
 
-   await transporter.sendMail({
+   const info = await transporter.sendMail({
       from: "langfordquarshie21@gmail.com",
       to: receipient,
       subject: "This is a test email",
       html,
    });
 
-   //  return Response.json({ info });
+   return new Response(`${JSON.stringify(info)}`);
 }

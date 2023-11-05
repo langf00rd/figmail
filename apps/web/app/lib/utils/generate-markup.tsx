@@ -1,10 +1,10 @@
 import * as ReactDomServer from "react-dom/server";
 import { toast } from "sonner";
-import Body from "../../components/body";
-import Head from "../../components/head";
-import Html from "../../components/html";
-import { Preview } from "../../components/preview";
-import Section from "../../components/section";
+import Body from "../../components/ui/body";
+import Head from "../../components/ui/head";
+import Html from "../../components/ui/html";
+import { Preview } from "../../components/ui/preview";
+import Section from "../../components/ui/section";
 import type { GenerateMarkupProps } from "../../../interface";
 import { BODY_STYLE, DOCTYPE } from "../constants";
 /**

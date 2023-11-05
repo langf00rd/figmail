@@ -1,6 +1,6 @@
 import type { UIElement } from "../../../interface";
 import { Draggable } from "../../components/draggable";
-import Table from "../../components/table";
+import Table from "../../components/ui/table";
 import { MAIN_STYLE } from "../../lib/constants";
 
 export default function Main(props: {

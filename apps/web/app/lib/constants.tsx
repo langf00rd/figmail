@@ -1,7 +1,8 @@
 import type { UIElement } from "../../interface";
-import Hr from "../components/hr";
-import Img from "../components/img";
-import Text from "../components/text";
+import Container from "../components/ui/container";
+import Hr from "../components/ui/hr";
+import Img from "../components/ui/img";
+import Text from "../components/ui/text";
 
 export const DOCTYPE =
   '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">';
@@ -51,6 +52,14 @@ export const UI_ELEMENTS: UIElement[] = [
     },
   },
   {
+    id: "5",
+    content: <Container />,
+    position: {
+      x: 0,
+      y: 0,
+    },
+  },
+  {
     id: "1",
     content: (
       <Text>
@@ -59,7 +68,7 @@ export const UI_ELEMENTS: UIElement[] = [
         since the 1500s, when an unknown printer took a galley of type and
         scrambled it to make a type specimen book. It has survived not only five
         centuries, but also the leap into electronic typesetting, remaining
-        essentially unchanged. It was popularised in the 1960s with the release
+        essentially unchanged. It was popularised in t5he 1960s with the release
         of Letraset sheets containing Lorem Ipsum passages, and more recently
         with desktop publishing software like Aldus PageMaker including versions
         of Lorem Ipsum.

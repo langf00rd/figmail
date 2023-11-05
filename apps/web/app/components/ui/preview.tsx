@@ -1,5 +1,5 @@
 import * as React from "react";
-import { PREVIEW_MAX_LENGTH } from "../lib/constants";
+import { PREVIEW_MAX_LENGTH } from "../../lib/constants";
 
 export interface PreviewProps extends React.ComponentPropsWithoutRef<"div"> {
   children: string | string[];
