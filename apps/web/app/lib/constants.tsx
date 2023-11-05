@@ -1,3 +1,4 @@
+import { Box, Pen } from "lucide-react";
 import type { UIElement } from "../../interface";
 import Container from "../components/ui/container";
 import Text from "../components/ui/text";
@@ -51,6 +52,7 @@ export const UI_ELEMENTS: UIElement[] = [
    // },
    {
       id: "5",
+      icon: <Box />,
       content: (
          <Container
             style={{
@@ -66,7 +68,8 @@ export const UI_ELEMENTS: UIElement[] = [
    },
    {
       id: "1",
-      customizeableStyles: ["BG", "COLOR"],
+      icon: <Pen />,
+      customizeableStyles: ["COLOR", "TEXT-ALIGN", "FONT-SIZE"],
       content: (
          <Text>
             It was popularised in t5he 1960s with the release of Letraset sheets
