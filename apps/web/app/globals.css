@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+/* 
 * {
    margin: 0;
    padding: 0;
@@ -26,6 +26,8 @@ b {
       object-fit: contain;
    }
 }
+
+*/
 
 .resizable {
    border: 2px solid transparent;

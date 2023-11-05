@@ -30,6 +30,7 @@ export default function Editor(): JSX.Element {
 
   function duplicate(element: UIElement): void {
     const newElement: UIElement = {
+      ...element,
       id: Date.now().toString(),
       content: element.content,
       position: {

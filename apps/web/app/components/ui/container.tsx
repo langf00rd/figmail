@@ -12,7 +12,12 @@ export default function Container(props: ContainerProps): JSX.Element {
       cellPadding="0"
       cellSpacing="0"
       role="presentation"
-      style={{ maxWidth: "37.5em", ...props.style }}
+      style={{
+        maxWidth: "37.5em",
+        minHeight: "30px",
+        height: "100%",
+        ...props.style,
+      }}
     >
       <tbody>
         <tr style={{ width: "100%" }}>
